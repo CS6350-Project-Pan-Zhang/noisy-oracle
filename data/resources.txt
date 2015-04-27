@@ -1,0 +1,7 @@
+Dataset		Size	+/- Ratio	Dimensions	URL
+image		2310	1.33		18		https://archive.ics.uci.edu/ml/datasets/Statlog+%28Image+Segmentation%29
+mushroom	8124	1.07		22		https://archive.ics.uci.edu/ml/datasets/Mushroom
+spambase	4601	0.65		57		https://archive.ics.uci.edu/ml/datasets/Spambase
+phoneme		5404	0.41		5		http://sci2s.ugr.es/keel/dataset.php?cod=105
+ringnorm	7400	0.98		20		http://mldata.org/repository/data/viewslug/ringnorm-ida/
+svmguide	3089	1.83		4		http://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary.html
