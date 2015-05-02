@@ -70,7 +70,7 @@ class DataSet:
             self._size_negative += 1
         self._size += 1
 
-    def remove_instance(self, i):
+    def remove_inst(self, i):
         """
         Remove the ith instance in this data set.
         Raise IndexError if i<0 or i>=self.size()
@@ -79,16 +79,41 @@ class DataSet:
         """
         if i < 0 or i >= self._size:
             raise IndexError('Index out of bound!')
-        instance = self._dataset[i]
-        if instance.label() == 1:
-            del self._positive[self._positive.index(i)]
-            self._size_positive -= 1
-        else:
-            del self._negative[self._negative.index(i)]
-            self._size_negative -= 1
         del self._dataset[i]
         self._size -= 1
-        pass
+
+    def _remove_inst_w_pn(self, i):
+        """
+        Remove the ith instance in this data set and update the _positive and _negative indices lists.
+        Raise IndexError if i<0 or i>=self.size()
+        :param i: the index of the instance to be removed
+        :return: None
+        """
+        if i < 0 or i >= self._size:
+            raise IndexError('Index out of bound!')
+        del self._dataset[i]
+        self._size -= 1
+        # need to update the indices in _positive and _negative
+        # positive indices
+        to_del_ = -1
+        for j in range(len(self._positive)):
+            if self._positive[j] > i:
+                self._positive[j] -= 1
+            elif self._positive[j] == i:
+                to_del_ = j
+        if to_del_ >= 0:
+            del self._positive[to_del_]
+            self._size_positive -= 1
+        # negative
+        to_del_ = -1
+        for j in range(len(self._negative)):
+            if self._negative[j] > i:
+                self._negative[j] -= 1
+            elif self._negative[j] == i:
+                to_del_ = j
+        if to_del_ >= 0:
+            del self._negative[to_del_]
+            self._size_negative -= 1
 
     def get_inst(self, i):
         """
@@ -163,7 +188,7 @@ class DataSet:
         i = random.randint(0, self._size_positive-1)
         index = self._positive[i]
         inst = self._dataset[index]
-        self.remove_instance(index)
+        self._remove_inst_w_pn(index)
         return inst
 
     def pop_random_negative_inst(self):
@@ -174,7 +199,7 @@ class DataSet:
         i = random.randint(0, self._size_negative-1)
         index = self._negative[i]
         inst = self._dataset[index]
-        self.remove_instance(index)
+        self._remove_inst_w_pn(index)
         return inst
 
     def feature_label(self):

@@ -29,7 +29,7 @@ class NoisyOracle:
 def _test_noisy_oracle():
     p = 0.9
     noisy_o = NoisyOracle(p)
-    predict = [noisy_o.assert_label(1) for i in range(10)]
+    predict = [noisy_o.assert_label() for i in range(10)]
     print(predict)
 
 

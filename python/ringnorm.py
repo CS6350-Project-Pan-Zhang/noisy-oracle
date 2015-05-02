@@ -6,6 +6,7 @@ from util import DataSet, Item
 path_suffix = 'I:/My Classes/Utah/cs/CS6350spring2015/project/replication/'
 source_path = 'data/ringnorm/'
 
+
 def read_data_from_file(filename):
     """
     Obtain the ringnorm data set.
@@ -20,7 +21,7 @@ def read_data_from_file(filename):
         for line in data_source:
             all_data = line.rstrip('\n').split(',')
             features = [float(all_data[i]) for i in range(1, len(all_data))]
-            label = int(all_data[0])
+            label = int(float(all_data[0]))
             ringnorm.add_inst(Item(features, label))
     return ringnorm
 
@@ -29,7 +30,7 @@ def _test_ringnorm():
     filename = 'ringnorm_data1.csv'
     rn = read_data_from_file(filename)
     # test size
-    # print('number of examples ' + str(rn.size()))
+    print('number of examples ' + str(rn.size()))
 
     # test division
     def _test_division():
@@ -51,7 +52,7 @@ def _test_ringnorm():
         print('a negative example removed')
         print(rn.pop_random_negative_inst())
         print(str(rn))
-    # _test_pop_pos_neg()
+    _test_pop_pos_neg()
 
     # test separating features and labels
     def _test_separation():
@@ -68,7 +69,7 @@ def _test_ringnorm():
         print('test deletion')
         features, label = rn.feature_label()
         i = 5
-        rn.remove_instance(i)
+        rn.remove_inst(i)
         # features is an ndarray
         features = np.delete(features, i, 0)
         # label is an ndarray -- np.delete(array, index, axis)
@@ -81,7 +82,7 @@ def _test_ringnorm():
             # print(str(fi) + ', ' + str(li) + '\n')
             print((inst.features() == fi))
             print((inst.label() == li))
-    _test_deletion()
+    # _test_deletion()
 
 
 if __name__ == '__main__':

@@ -18,8 +18,8 @@ class IENoisyOracle(NoisyOracle):
     """
 
     def __init__(self, prob):
-        # the noise probability
-        self._p = prob
+        # call the base class
+        super(IENoisyOracle, self).__init__(prob)
         # history for making correct (agree with the majority) labeling -- 1 being correct and 0 being incorrect
         self._history = []
         # everyone gets a 1 and a 0 initially
